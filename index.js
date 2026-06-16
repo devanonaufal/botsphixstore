@@ -55,7 +55,7 @@ bot.on("callback_query", async (ctx, next) => {
 
     if (!allowedUser || allowedUser.approved !== 1) {
       return ctx.answerCbQuery(
-        "⏳ Akun kamu belum disetujui admin. Hubungi WA: +6281283933929 (Fajar)",
+        "⏳ Akun kamu belum disetujui admin. Hubungi WA: +6282234940310 (SphixRay)",
         { show_alert: true }
       );
     }
@@ -107,12 +107,12 @@ bot.command("setterms", command.setTerms);
 bot.command("infobot", (ctx) => {
   try {
     const text =
-      "*❖ Creator Bot : FajarXD*\n*❖ Version : V1.0*\n\n*Want to buy my bot?? Chat me on Whatsapp Click below👇*";
+      "*❖ Creator Bot : SphixRay*\n*❖ Version : V1.0*\n\n*Want to buy my bot?? Chat me on Whatsapp Click below👇*";
 
     ctx.replyWithMarkdown(text, {
       ...Markup.inlineKeyboard([
-        [Markup.button.url("Whatsapp 🪀", "https://wa.me/6281283933929")],
-        [Markup.button.url("Telegram 👔", "https://t.me/fa_jrrrr")],
+        [Markup.button.url("Whatsapp 🪀", "https://wa.me/6282234940310")],
+        [Markup.button.url("Telegram 👔", "https://t.me/sphixray")],
       ]),
     });
   } catch (err) {
@@ -194,7 +194,7 @@ bot.command("updatesticker", updateSticker);
 bot.telegram.getMe().then(async (me) => {
   console.clear();
   console.log(await clc.blue(await figlet("Auto Order")));
-  console.log("Mau Beli Script??? Silahkan Hubungi, Whatsapp : https://wa.me/6281283933929");
+  console.log("Mau Beli Script??? Silahkan Hubungi, Whatsapp : https://wa.me/6282234940310");
   console.log(
     clc.green.bold("[ INFO ]") +
       ` [${moment().format("HH:mm:ss")}]:` +

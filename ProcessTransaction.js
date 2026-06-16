@@ -90,7 +90,7 @@ async function ProcessingTransaction(bot) {
 └ Jumlah: ${transaction.orderQuantity}
 └ Total: Rp ${transaction.totalPrice.toLocaleString('id-ID')}
 Terimakasih sudah membeli produk kami 🙏.
-Jika ada kendala pada akun segera chat admin @fa_jrrrr`;
+Jika ada kendala pada akun segera chat admin @sphixray`;
 
                         await bot.telegram.sendMessage(transaction.chatId, successMessage);
 
