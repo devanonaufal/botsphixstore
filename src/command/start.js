@@ -113,7 +113,7 @@ const startCommand = async (ctx) => {
         }).format(totalProfit);
 
         // Buat pesan profil sesuai format gambar
-        const profileMessage = `Selamat Datang di Auto Order BlackHost!
+        const profileMessage = `Selamat Datang di BOT Auto Order SPHIXSTORE!
 
 Informasi Anda:
 ID: ${from.id}
