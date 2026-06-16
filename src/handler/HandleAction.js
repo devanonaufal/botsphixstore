@@ -55,6 +55,9 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+// ======================================================
+// FUNGSI INI TIDAK DIGUNAKAN LAGI (FEE DINONAKTIFKAN)
+// ======================================================
 async function generateUniqueRandomPrice() {
     const totalPriceList = [];
     const getTransaction = db.prepare(`
@@ -276,7 +279,9 @@ class HandleAction {
         }
     }
 
-
+    // ======================================================
+    // CONFIRM ORDER - FEE DINONAKTIFKAN (FEE = 0)
+    // ======================================================
     async ConfirmOrder(ctx) {
         try {
             await delay(1_000);
@@ -322,9 +327,15 @@ class HandleAction {
             }
 
             try { ctx.answerCbQuery("Bot sedang membuat QRIS..", { show_alert: true }); } catch(e) {}
-            const fee = await generateUniqueRandomPrice();
-            const totalAmount = Number(orderAmount * price) + Number(fee);
-            // await createQRIS(`${totalAmount}`, `./src/img/qris/qris-${formattedDateFile}.png`);
+            
+            // ======================================================
+            // FEE DINONAKTIFKAN - Bayar sesuai total pesanan
+            // ======================================================
+            const fee = 0; // Fee di-set 0
+            const totalAmount = Number(orderAmount * price); // Langsung total tanpa fee
+            // const fee = await generateUniqueRandomPrice(); // DI-NONAKTIFKAN
+            // const totalAmount = Number(orderAmount * price) + Number(fee); // DI-NONAKTIFKAN
+            
             const formattedDateFile = moment().tz('Asia/Jakarta').format('YYYY-MM-DD_HH-mm-ss');
             const uniqCode = generateRandomCode();
             const [qr_img, trxPaymentKitaRef] = await getGoPayGatewayQris(totalAmount, uniqCode, `Pembelian ${product}`);
@@ -769,7 +780,7 @@ class HandleAction {
                 `└ Jumlah: ${transaction.orderQuantity}\n` +
                 `└ Total: Rp ${transaction.totalPrice.toLocaleString('id-ID')}\n` +
                 `Terimakasih sudah membeli produk kami 🙏.\n` +
-                `Jika ada kendala pada akun segera chat admin @fa_jrrrr`;
+                `Jika ada kendala pada akun segera chat admin @sphixray`;
 
             await ctx.telegram.sendMessage(transaction.chatId, successMessage);
 
