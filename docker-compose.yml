@@ -1,0 +1,12 @@
+services:
+  sphixstore:
+    build: .
+    container_name: sphixstore
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./database.sqlite:/app/database.sqlite
+      - ./logs:/app/logs
