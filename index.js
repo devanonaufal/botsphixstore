@@ -33,11 +33,17 @@ function delay(ms) {
 
 var bot = new Telegraf(token_bot);
 
+// FIX: Menambahkan .catch() agar bot kebal terhadap error 504 Telegram
 bot.telegram.setMyCommands([
   { command: "start", description: "Start the bot" },
   { command: "infobot", description: "Info Bot" },
   { command: "adminmenu", description: "Open admin panel" },
-]);
+]).catch((err) => {
+  console.log(
+    clc.yellow.bold("[ WARNING ]") +
+    ` [${moment().format("HH:mm:ss")}]: Gagal set command Telegram (bisa diabaikan): ${err.message}`
+  );
+});
 
 bot.on("text", (ctx, next) => middleware(ctx, next));
 
