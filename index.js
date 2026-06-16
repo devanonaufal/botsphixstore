@@ -47,28 +47,13 @@ bot.telegram.setMyCommands([
 
 bot.on("text", (ctx, next) => middleware(ctx, next));
 
-// Access check untuk callback query (inline buttons)
+// ======================================================
+// ACCESS CHECK UNTUK CALLBACK QUERY - DIMATIKAN
+// SEMUA USER BISA LANGSUNG AKSES TANPA PERSETUJUAN ADMIN
+// ======================================================
 bot.on("callback_query", async (ctx, next) => {
-  const { getDatabase } = require("./src/database/connect");
-  try {
-    const userId = ctx.from.id;
-    if (String(userId) === String(process.env.WHITELIST_ID)) return next();
-
-    const db = getDatabase();
-    const allowedUser = db
-      .prepare(`SELECT * FROM allowed_users WHERE idTelegram = ?`)
-      .get(userId);
-
-    if (!allowedUser || allowedUser.approved !== 1) {
-      return ctx.answerCbQuery(
-        "⏳ Akun kamu belum disetujui admin. Hubungi WA: +6282234940310 (SphixRay)",
-        { show_alert: true }
-      );
-    }
-    return next();
-  } catch (err) {
-    return next();
-  }
+  // Langsung lanjutkan tanpa pengecekan whitelist
+  return next();
 });
 
 //help command
@@ -187,7 +172,7 @@ bot.action(/^product-(.+)$/, (ctx) => {
 });
 bot.action(/^del-product-id-(\d+)$/, (ctx) => handleAction.deleteProductById(ctx));
 
-// User management commands (admin only)
+// User management commands (admin only) - MASIH TERSEDIA TAPI TIDAK BERPENGARUH
 bot.command("approveuser", command.approveUser);
 bot.command("removeuser", command.removeUser);
 bot.command("listpending", command.listPending);
